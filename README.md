@@ -82,4 +82,4 @@ ___
 Simply write this command  
 `python merge_reports.py`
 
-You will wind a merged file into the `/merged` directory.
+You will find a merged file into the `/merged` directory.
