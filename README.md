@@ -15,9 +15,12 @@ Then you can merge the single reports into a big one.
 
 ## How to use it:
 Just fill the fields and select the output format.
+![interface_1](./screenshots/interface_1.png)
+![interface_2](./screenshots/interface_2.png)  
 
-
-> This will generate a file called `Valencia.md` in the `/reports` folder. Like this:
+> This will generate a file called `Valencia.md` in the `/reports` folder. Like this:  
+  
+![generated](./screenshots/generated.png)
 
 ___
 
@@ -53,22 +56,14 @@ __COSTI per 7 notti__
 
 __Notes__: 
 >Ricorda di controllare il gli scioperi dei voli
-___
 
-## How to Merge your report
-
+___  
+  
+## How to Merge your report  
+  
 Simply write this command  
-`python merge_reports.py`
-
-You will find a merged file into the `/merged` directory.
-
----
-
-![interface_1](./screenshots/interface_1.png)
-![interface_2](./screenshots/interface_2.png)  
-
----  
-
-![generated](./screenshots/generated.png)
-
+`python merge_reports.py`  
+  
+You will find a merged file into the `/merged` directory.  
+  
 ![merged_pdf](./screenshots/merged_pdf.png)
