@@ -1,43 +1,21 @@
 # What's that:
 It takes info about your next travel and generate a small report, so you can think about different destinations with some comparison.  
 
-then you can merge the single reports into a big one.  
+Then you can merge the single reports into a big one.  
 
-For info on how to use write in terminal  
-- `python travel_info_generator.py --help`  
+---
 
-```bash
-It generates a travel report based on the input provided.
+## How to run it:
+1. Install python3 on your machine if is not already installed.  
+2. Install `pandoc` on your system : [HERE](https://pandoc.org/installing.html)  
+2. Run this command in the root folder:
+    - `python -m travel_report_gui`  
 
-positional arguments:
-  destination
-  number_of_people
-  number_of_nights
-  desire_lv_to_visit
-  departure_date
-  return_date
-  departure_airport_outward_journey
-  departure_time_outward_journey
-  arrival_airport_outward_journey
-  arrival_time_outward_journey
-  price_outward_journey
-  departure_airport_return_journey
-  departure_time_return_journey
-  arrival_airport_return_journey
-  arrival_time_return_journey
-  price_return_journey
-  baggage_cost
-  avg_nightly_cost
-  car_rental_cost
-  home_airport_journey_cost
+---
 
-options:
-  -h, --help            show this help message and exit
-  --notes NOTES
-```
+## How to use it:
+Just fill the fields and select the output format.
 
-Example usage  
-`python travel_info_generator.py "Valencia" 2 7 16 Sabato-27/09 Domenica-05/10 "Milano Bergamo" 14:40 "Valencia" 16:40 36.99 "Valencia" 09:10 "Milano Bergamo" 11:00 26.19 27.75 90 0 130 --notes "Ricorda di controllare il gli scioperi dei voli"`  
 
 > This will generate a file called `Valencia.md` in the `reports` folder. Like this:
 
