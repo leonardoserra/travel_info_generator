@@ -34,10 +34,7 @@ class TravelReportGUI:
         scrollbar.pack(side="right", fill="y")
 
         # Bind mousewheel to canvas
-        def _on_mousewheel(event):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-
-        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        canvas.bind_all("<MouseWheel>", lambda event: canvas.yview_scroll(int(-1 * (event.delta / 120)), "units"))
 
         self.create_widgets(scrollable_frame)
 
@@ -591,40 +588,41 @@ class TravelReportGUI:
         )
 
         markup = f"""
-        # {params.destination}
+# {params.destination}
 
-        *Voglia di andarci*: _{desire_to_visit}/10_  
-        *Numero Notti*: _{params.number_of_nights}_  
+*Voglia di andarci*: _{desire_to_visit}/10_  
+*Numero Persone*: _{params.number_of_people}_  
+*Numero Notti*: _{params.number_of_nights}_  
 
-        ### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_  
-        >**Partenza**: {params.departure_airport_outward_journey} **{params.departure_time_outward_journey}**  
-        >**Arrivo**: {params.arrival_airport_outward_journey} **{params.arrival_time_outward_journey}**  
+### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_  
+        **Partenza**: {params.departure_airport_outward_journey} **{params.departure_time_outward_journey}**  
+        **Arrivo**: {params.arrival_airport_outward_journey} **{params.arrival_time_outward_journey}**  
 
-        ### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_  
-        >**Partenza**: {params.departure_airport_return_journey} **{params.departure_time_return_journey}**  
-        >**Arrivo**: {params.arrival_airport_return_journey} **{params.arrival_time_return_journey}**  
+### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_  
+        **Partenza**: {params.departure_airport_return_journey} **{params.departure_time_return_journey}**  
+        **Arrivo**: {params.arrival_airport_return_journey} **{params.arrival_time_return_journey}**  
 
-        __Bagaglio__  
-        >10kg: {params.baggage_cost}€  
+#### Bagaglio  
+        10kg: {params.baggage_cost}€  
 
-        __Costo Medio a notte__  
-        >{params.avg_nightly_cost}€ per {params.number_of_people} persone.  
+#### Costo Medio a notte  
+        {params.avg_nightly_cost}€ per {params.number_of_people} persone.  
 
-        __Costo Noleggio Veicolo__  
-        >{params.car_rental_cost}€ per {params.number_of_nights - 1 } giorni.  
+#### Costo Noleggio Veicolo  
+        {params.car_rental_cost}€ per {params.number_of_nights - 1 } giorni.  
 
-        __Costo Tragitto Casa Aeroporto__  
-        >{params.home_airport_journey_cost}€ treno o auto + casello + taxi o bus o navette varie.  
+#### Costo Tragitto Casa Aeroporto  
+        {params.home_airport_journey_cost}€ treno o auto + casello + taxi o bus o navette varie.  
 
-        __COSTI per {params.number_of_nights} notti__  
-        >Totale: {tot}€  
-        >Tot a persona: {round(tot / params.number_of_people, 2)}€  
-        >Tot a notte per persona : {round(tot / params.number_of_people / params.number_of_nights)}€  
+#### Costi per {params.number_of_nights} notti  
+        Totale: {tot}€  
+        Tot a persona: {round(tot / params.number_of_people, 2)}€  
+        Tot a notte per persona : {round(tot / params.number_of_people / params.number_of_nights)}€  
 
-        {notes}
-        """
+{notes}
+"""
 
-        return dedent(markup)
+        return markup
 
 
 def main():

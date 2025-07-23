@@ -4,7 +4,7 @@
 *Numero Notti*: _7_  
 
 ### Andata: **Sabato-27/09** - _36.99€_  
->**Partenza**: Milano Bergamo **14:40**  
+>**Partenza**: Milano Bergamo **14:10**  
 >**Arrivo**: Valencia **16:40**  
 
 ### Ritorno: **Domenica-05/10** - _26.19€_  
@@ -28,5 +28,6 @@ __COSTI per 7 notti__
 >Tot a persona: 411.59€  
 >Tot a notte per persona : 59€  
 
-__Notes__: 
->Ricorda di controllare il gli scioperi dei voli
+__Notes__:
+>Remember to take the tickets!
+
