@@ -14,10 +14,11 @@ Then you can merge the single reports into a big one.
 ---
 
 ## How to use it:
-Just fill the fields and select the output format.
+Just fill the fields, select the output format and press `Generate Report`.  
+  
 ![interface_1](./screenshots/interface_1.png)
 ![interface_2](./screenshots/interface_2.png)  
-
+  
 > This will generate a file called `Valencia.md` in the `/reports` folder. Like this:  
   
 ![generated](./screenshots/generated.png)
@@ -61,8 +62,7 @@ ___
   
 ## How to Merge your report  
   
-Simply write this command  
-`python merge_reports.py`  
+Simply choose the output format and press `Merge All Reports`
   
 You will find a merged file into the `/merged` directory.  
   
