@@ -94,7 +94,7 @@ class TravelReportGUI:
         ttk.Label(dates_frame, font=('consolas', 12), text="Departure Date:").grid(
             row=0, column=0, sticky=tk.W, pady=2
         )
-        self.departure_date_var = tk.StringVar()
+        self.departure_date_var = tk.StringVar(value='26/06/1992')
         ttk.Entry(dates_frame, font=('consolas', 12), textvariable=self.departure_date_var, width=30).grid(
             row=0, column=1, padx=(10, 0), pady=2
         )
@@ -103,7 +103,7 @@ class TravelReportGUI:
         ttk.Label(dates_frame, font=('consolas', 12), text="Return Date:").grid(
             row=1, column=0, sticky=tk.W, pady=2
         )
-        self.return_date_var = tk.StringVar()
+        self.return_date_var = tk.StringVar(value='14/09/1996')
         ttk.Entry(dates_frame, font=('consolas', 12), textvariable=self.return_date_var, width=30).grid(
             row=1, column=1, padx=(10, 0), pady=2
         )
@@ -116,7 +116,7 @@ class TravelReportGUI:
         ttk.Label(outward_frame, font=('consolas', 12), text="Departure Airport:").grid(
             row=0, column=0, sticky=tk.W, pady=2
         )
-        self.departure_airport_outward_var = tk.StringVar()
+        self.departure_airport_outward_var = tk.StringVar(value='From')
         ttk.Entry(
             outward_frame, font=('consolas', 12), textvariable=self.departure_airport_outward_var, width=30
         ).grid(row=0, column=1, padx=(10, 0), pady=2)
@@ -125,7 +125,7 @@ class TravelReportGUI:
         ttk.Label(outward_frame, font=('consolas', 12), text="Departure Time:").grid(
             row=1, column=0, sticky=tk.W, pady=2
         )
-        self.departure_time_outward_var = tk.StringVar()
+        self.departure_time_outward_var = tk.StringVar(value='00:00')
         ttk.Entry(
             outward_frame, font=('consolas', 12), textvariable=self.departure_time_outward_var, width=30
         ).grid(row=1, column=1, padx=(10, 0), pady=2)
@@ -134,7 +134,7 @@ class TravelReportGUI:
         ttk.Label(outward_frame, font=('consolas', 12), text="Arrival Airport:").grid(
             row=2, column=0, sticky=tk.W, pady=2
         )
-        self.arrival_airport_outward_var = tk.StringVar()
+        self.arrival_airport_outward_var = tk.StringVar(value="To")
         ttk.Entry(
             outward_frame, font=('consolas', 12), textvariable=self.arrival_airport_outward_var, width=30
         ).grid(row=2, column=1, padx=(10, 0), pady=2)
@@ -143,7 +143,7 @@ class TravelReportGUI:
         ttk.Label(outward_frame, font=('consolas', 12), text="Arrival Time:").grid(
             row=3, column=0, sticky=tk.W, pady=2
         )
-        self.arrival_time_outward_var = tk.StringVar()
+        self.arrival_time_outward_var = tk.StringVar(value='00:00')
         ttk.Entry(
             outward_frame, font=('consolas', 12), textvariable=self.arrival_time_outward_var, width=30
         ).grid(row=3, column=1, padx=(10, 0), pady=2)
@@ -165,7 +165,7 @@ class TravelReportGUI:
         ttk.Label(return_frame, font=('consolas', 12), text="Departure Airport:").grid(
             row=0, column=0, sticky=tk.W, pady=2
         )
-        self.departure_airport_return_var = tk.StringVar()
+        self.departure_airport_return_var = tk.StringVar(value='From')
         ttk.Entry(
             return_frame, font=('consolas', 12), textvariable=self.departure_airport_return_var, width=30
         ).grid(row=0, column=1, padx=(10, 0), pady=2)
@@ -174,7 +174,7 @@ class TravelReportGUI:
         ttk.Label(return_frame, font=('consolas', 12), text="Departure Time:").grid(
             row=1, column=0, sticky=tk.W, pady=2
         )
-        self.departure_time_return_var = tk.StringVar()
+        self.departure_time_return_var = tk.StringVar(value='00:00')
         ttk.Entry(
             return_frame, font=('consolas', 12), textvariable=self.departure_time_return_var, width=30
         ).grid(row=1, column=1, padx=(10, 0), pady=2)
@@ -183,7 +183,7 @@ class TravelReportGUI:
         ttk.Label(return_frame, font=('consolas', 12), text="Arrival Airport:").grid(
             row=2, column=0, sticky=tk.W, pady=2
         )
-        self.arrival_airport_return_var = tk.StringVar()
+        self.arrival_airport_return_var = tk.StringVar(value='To')
         ttk.Entry(
             return_frame, font=('consolas', 12), textvariable=self.arrival_airport_return_var, width=30
         ).grid(row=2, column=1, padx=(10, 0), pady=2)
@@ -192,7 +192,7 @@ class TravelReportGUI:
         ttk.Label(return_frame, font=('consolas', 12), text="Arrival Time:").grid(
             row=3, column=0, sticky=tk.W, pady=2
         )
-        self.arrival_time_return_var = tk.StringVar()
+        self.arrival_time_return_var = tk.StringVar(value='00:00')
         ttk.Entry(
             return_frame, font=('consolas', 12), textvariable=self.arrival_time_return_var, width=30
         ).grid(row=3, column=1, padx=(10, 0), pady=2)
@@ -571,13 +571,27 @@ class TravelReportGUI:
         except Exception as e:
             messagebox.showerror("Error", f"Merge operation failed: {str(e)}")
 
-    def generate_notes(self, notes):
-        return f"__Notes__:\n>{notes}\n"
+    def render_baggage(self, params):
+        value = f"#### Bagaglio  \n\t10kg: {params.baggage_cost}€  \n"
+        return dedent(value) if params.baggage_cost else ""
+    
+    def render_avg_night_cost(self, params):
+        value =  f"#### Costo Medio a notte  \n\t{params.avg_nightly_cost}€ per {params.number_of_people} persone.  \n"
+        return dedent(value) if params.avg_nightly_cost else ""
 
-    def generate_content(self, params):
-        notes = self.generate_notes(params.notes) if params.notes else ""
-        desire_to_visit = params.desire_lv_to_visit / params.number_of_people
+    def render_car_rental(self, params):
+        value = f"#### Costo Noleggio Veicolo  \n\t{params.car_rental_cost}€ per {params.number_of_nights - 1 } giorni. \n"
+        return dedent(value) if params.car_rental_cost else ""
 
+    def render_home_airport(self, params):
+        value =  f"#### Costo Tragitto Casa Aeroporto  \n\t{params.home_airport_journey_cost}€ treno o auto + casello + taxi o bus o navette varie.  \n"
+        return dedent(value) if params.home_airport_journey_cost else ""
+
+    def render_notes(self, params):
+        value = f"__Notes__:  \n>{params.notes}\n"
+        return dedent(value) if params.notes else ""
+    
+    def render_totals(self, params):
         tot = round(
             (params.avg_nightly_cost * params.number_of_nights)
             + params.car_rental_cost
@@ -586,43 +600,54 @@ class TravelReportGUI:
             + params.home_airport_journey_cost,
             2,
         )
+        per_person = round(tot / params.number_of_people, 2)
+        per_person_per_night =  round(per_person / params.number_of_nights, 2)
 
-        markup = f"""
-# {params.destination}
+        return f"#### Costi per {params.number_of_nights} notti  \n\tTotale: {tot}€  \n\tTot a persona: {per_person}€  \n\tTot a notte per persona : {per_person_per_night}€"
+    
+    def render_desire(self, params):
+        desire_to_visit = params.desire_lv_to_visit / params.number_of_people
+        return f"*Voglia di andarci*: _{desire_to_visit}/10_  "
+    
+    def render_going(self, params):
+        return f"### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_\n\tPartenza: {params.departure_airport_outward_journey} - {params.departure_time_outward_journey}\n\tArrivo: {params.arrival_airport_outward_journey} - {params.arrival_time_outward_journey}"
+    
+    def render_return(self, params):
+        return f"### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_\n\tPartenza: {params.departure_airport_return_journey} - {params.departure_time_return_journey}\n\tArrivo: {params.arrival_airport_return_journey} - {params.arrival_time_return_journey}"
 
-*Voglia di andarci*: _{desire_to_visit}/10_  
-*Numero Persone*: _{params.number_of_people}_  
-*Numero Notti*: _{params.number_of_nights}_  
+    def render_destination(self, params):
+        return f"# {params.destination}"
 
-### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_  
-        **Partenza**: {params.departure_airport_outward_journey} **{params.departure_time_outward_journey}**  
-        **Arrivo**: {params.arrival_airport_outward_journey} **{params.arrival_time_outward_journey}**  
+    def render_ppl_quantity(self, params):
+        return f"*Numero Persone*: _{params.number_of_people}_  "
 
-### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_  
-        **Partenza**: {params.departure_airport_return_journey} **{params.departure_time_return_journey}**  
-        **Arrivo**: {params.arrival_airport_return_journey} **{params.arrival_time_return_journey}**  
+    def render_nights_quantity(self,params):
+        return f"*Numero Notti*: _{params.number_of_nights}_  "
 
-#### Bagaglio  
-        10kg: {params.baggage_cost}€  
+    def generate_content(self, params):
 
-#### Costo Medio a notte  
-        {params.avg_nightly_cost}€ per {params.number_of_people} persone.  
+        # this is made to not write a f string and indent it all to the left.
+        # dedent doesn't work in this case.
+        lines =  [
+            self.render_destination(params),
+            self.render_desire(params),
+            self.render_ppl_quantity(params),
+            self.render_nights_quantity(params),
+            self.render_going(params),
+            self.render_return(params),
+            self.render_baggage(params),
+            self.render_avg_night_cost(params),
+            self.render_car_rental(params),
+            self.render_home_airport(params),
+            self.render_totals(params),
+            self.render_notes(params)
+        ]
 
-#### Costo Noleggio Veicolo  
-        {params.car_rental_cost}€ per {params.number_of_nights - 1 } giorni.  
-
-#### Costo Tragitto Casa Aeroporto  
-        {params.home_airport_journey_cost}€ treno o auto + casello + taxi o bus o navette varie.  
-
-#### Costi per {params.number_of_nights} notti  
-        Totale: {tot}€  
-        Tot a persona: {round(tot / params.number_of_people, 2)}€  
-        Tot a notte per persona : {round(tot / params.number_of_people / params.number_of_nights)}€  
-
-{notes}
-"""
-
-        return markup
+        content = ""
+        for line in lines:
+            content += str(line) + "  \n"
+        
+        return content
 
 
 def main():
