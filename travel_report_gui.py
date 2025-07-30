@@ -1,11 +1,12 @@
 import os
-import sys
-import tkinter as tk
-from tkinter import ttk, messagebox
-from textwrap import dedent
-from pathlib import Path
 import subprocess
-import shutil
+import tkinter as tk
+
+from pathlib import Path
+from textwrap import dedent
+
+from tkinter import ttk
+from tkinter import messagebox
 
 
 class TravelReportGUI:
@@ -588,7 +589,7 @@ class TravelReportGUI:
         return dedent(value) if params.home_airport_journey_cost else ""
 
     def render_notes(self, params):
-        value = f"__Notes__:  \n>{params.notes}\n"
+        value = f"__Notes__:  \n```{params.notes}```\n"
         return dedent(value) if params.notes else ""
     
     def render_totals(self, params):
@@ -603,26 +604,26 @@ class TravelReportGUI:
         per_person = round(tot / params.number_of_people, 2)
         per_person_per_night =  round(per_person / params.number_of_nights, 2)
 
-        return f"#### Costi per {params.number_of_nights} notti  \n\tTotale: {tot}€  \n\tTot a persona: {per_person}€  \n\tTot a notte per persona : {per_person_per_night}€"
+        return f"#### Costi per {params.number_of_nights} notti  \n\tTotale: {tot}€  \n\tTot a persona: {per_person}€  \n\tTot a notte per persona : {per_person_per_night}€  \n"
     
     def render_desire(self, params):
         desire_to_visit = params.desire_lv_to_visit / params.number_of_people
-        return f"*Voglia di andarci*: _{desire_to_visit}/10_  "
+        return f"*Voglia di andarci*: _{desire_to_visit}/10_  \n"
     
     def render_going(self, params):
-        return f"### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_\n\tPartenza: {params.departure_airport_outward_journey} - {params.departure_time_outward_journey}\n\tArrivo: {params.arrival_airport_outward_journey} - {params.arrival_time_outward_journey}"
+        return f"### Andata: **{params.departure_date}** - _{params.price_outward_journey}€_  \n\tPartenza: {params.departure_airport_outward_journey} - {params.departure_time_outward_journey}  \n\tArrivo: {params.arrival_airport_outward_journey} - {params.arrival_time_outward_journey}  \n"
     
     def render_return(self, params):
-        return f"### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_\n\tPartenza: {params.departure_airport_return_journey} - {params.departure_time_return_journey}\n\tArrivo: {params.arrival_airport_return_journey} - {params.arrival_time_return_journey}"
+        return f"### Ritorno: **{params.return_date}** - _{params.price_return_journey}€_  \n\tPartenza: {params.departure_airport_return_journey} - {params.departure_time_return_journey}  \n\tArrivo: {params.arrival_airport_return_journey} - {params.arrival_time_return_journey}  \n"
 
     def render_destination(self, params):
-        return f"# {params.destination}"
+        return f"# {params.destination}  \n"
 
     def render_ppl_quantity(self, params):
-        return f"*Numero Persone*: _{params.number_of_people}_  "
+        return f"*Numero Persone*: _{params.number_of_people}_  \n"
 
     def render_nights_quantity(self,params):
-        return f"*Numero Notti*: _{params.number_of_nights}_  "
+        return f"*Numero Notti*: _{params.number_of_nights}_  \n"
 
     def generate_content(self, params):
 
